@@ -76,9 +76,9 @@ public class Form extends javax.swing.JFrame {
                 Vector v2 = new Vector();
                 for(int a=1; a<=q; a++){
                     v2.add(rs.getString("id"));
-                    v2.add(rs.getString("first_name"));
-                    v2.add(rs.getString("last_name"));
-                    v2.add(rs.getString("student_id"));
+                    v2.add(rs.getString("product_name"));
+                    v2.add(rs.getString("product_price"));
+                    v2.add(rs.getString("product_quantity"));
                 }
                 df.addRow(v2);
             }
@@ -99,10 +99,10 @@ public class Form extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        fName = new javax.swing.JTextField();
+        productName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        lName = new javax.swing.JTextField();
-        studentNum = new javax.swing.JTextField();
+        productPrice = new javax.swing.JTextField();
+        productQuantity = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
@@ -120,24 +120,24 @@ public class Form extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel1.setText("First Name");
+        jLabel1.setText("Product Name");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 21, -1, -1));
 
-        fName.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        getContentPane().add(fName, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 47, 400, 30));
+        productName.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        getContentPane().add(productName, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 47, 400, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel2.setText("Last Name");
+        jLabel2.setText("Product Price");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 95, -1, -1));
 
-        lName.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        getContentPane().add(lName, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 121, 400, 30));
+        productPrice.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        getContentPane().add(productPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 121, 400, 30));
 
-        studentNum.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        getContentPane().add(studentNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 195, 400, 30));
+        productQuantity.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        getContentPane().add(productQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 195, 400, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel3.setText("Student ID");
+        jLabel3.setText("Product Quantity");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 169, -1, -1));
 
         submitButton.setFont(new java.awt.Font("Segoe UI Historic", 0, 11)); // NOI18N
@@ -194,7 +194,7 @@ public class Form extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "First Name", "Last Name", "Student ID"
+                "ID", "Product Name", "Product Price", "Product Quantity"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -225,22 +225,22 @@ public class Form extends javax.swing.JFrame {
        
         try {
             
-            String first_name = fName.getText();
-            String last_name = lName.getText();
-            String student_id = studentNum.getText();
+            String product_name = productName.getText();
+            String product_price = productPrice.getText();
+            String product_quantity = productQuantity.getText();
             
-            pst = con.prepareStatement("INSERT INTO users (first_name,last_name,student_id)VALUES (?,?,?)");
-            pst.setString(1, first_name);
-            pst.setString(2, last_name);
-            pst.setString(3, student_id);
+            pst = con.prepareStatement("INSERT INTO users (product_name,product_price,product_quantity)VALUES (?,?,?)");
+            pst.setString(1, product_name);
+            pst.setString(2, product_price);
+            pst.setString(3, product_quantity);
             
             int k = pst.executeUpdate();
             
             if (k==1) {
                 JOptionPane.showMessageDialog(this, "Sucessfully Added!");
-                fName.setText("");
-                lName.setText("");
-                studentNum.setText("");
+                productName.setText("");
+                productPrice.setText("");
+                productQuantity.setText("");
                 Fetch();
                 LoadProductNo();
                 
@@ -254,9 +254,9 @@ public class Form extends javax.swing.JFrame {
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        fName.setText("");
-        lName.setText("");
-        studentNum.setText("");
+        productName.setText("");
+        productPrice.setText("");
+        productQuantity.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -268,9 +268,9 @@ public class Form extends javax.swing.JFrame {
             rs=pst.executeQuery();
             
             if (rs.next()==true) {
-                fName.setText(rs.getString(2));
-                lName.setText(rs.getString(3));
-                studentNum.setText(rs.getString(4));
+                productName.setText(rs.getString(2));
+                productPrice.setText(rs.getString(3));
+                productQuantity.setText(rs.getString(4));
             } else {
                  JOptionPane.showMessageDialog(this, "No Record Found!");
             }
@@ -281,25 +281,25 @@ public class Form extends javax.swing.JFrame {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         try {
-            String first_name = fName.getText();
-            String last_name = lName.getText();
-            String student_id = studentNum.getText();
+            String product_name = productName.getText();
+            String product_price = productPrice.getText();
+            String product_quantity = productQuantity.getText();
             String pid = txtID.getSelectedItem().toString();
 
-            pst = con.prepareStatement("UPDATE users SET first_name=?, last_name=?, student_id=? WHERE id=?");
+            pst = con.prepareStatement("UPDATE users SET product_name=?, product_price=?, product_quantity=? WHERE id=?");
 
-            pst.setString(1, first_name);
-            pst.setString(2, last_name);
-            pst.setString(3, student_id);
+            pst.setString(1, product_name);
+            pst.setString(2, product_price);
+            pst.setString(3, product_quantity);
             pst.setString(4, pid);
 
             int k = pst.executeUpdate();
             if (k==1) {
                 JOptionPane.showMessageDialog(this, "Record has been successfully updated!");
-                fName.setText("");
-                lName.setText("");
-                studentNum.setText("");
-                fName.requestFocus();
+                productName.setText("");
+                productPrice.setText("");
+                productQuantity.setText("");
+                productName.requestFocus();
                 Fetch();
                 LoadProductNo();
             }
@@ -319,10 +319,10 @@ public class Form extends javax.swing.JFrame {
             int k = pst.executeUpdate();
             if (k==1) {
                 JOptionPane.showMessageDialog(this, "Record has been successfully deleted!");
-                fName.setText("");
-                lName.setText("");
-                studentNum.setText("");
-                fName.requestFocus();
+                productName.setText("");
+                productPrice.setText("");
+                productQuantity.setText("");
+                productName.requestFocus();
                 Fetch();
                 LoadProductNo();
             }else{
@@ -372,7 +372,6 @@ public class Form extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearButton;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JTextField fName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -380,9 +379,10 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField lName;
+    private javax.swing.JTextField productName;
+    private javax.swing.JTextField productPrice;
+    private javax.swing.JTextField productQuantity;
     private javax.swing.JButton searchButton;
-    private javax.swing.JTextField studentNum;
     private javax.swing.JButton submitButton;
     private javax.swing.JComboBox txtID;
     private javax.swing.JButton updateButton;
