@@ -102,7 +102,7 @@ public class Form extends javax.swing.JFrame {
         fName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         lName = new javax.swing.JTextField();
-        mobileNum = new javax.swing.JTextField();
+        studentNum = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
@@ -133,8 +133,8 @@ public class Form extends javax.swing.JFrame {
         lName.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
         getContentPane().add(lName, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 121, 400, 30));
 
-        mobileNum.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
-        getContentPane().add(mobileNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 195, 400, 30));
+        studentNum.setFont(new java.awt.Font("Ebrima", 0, 12)); // NOI18N
+        getContentPane().add(studentNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 195, 400, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel3.setText("Student ID");
@@ -227,7 +227,7 @@ public class Form extends javax.swing.JFrame {
             
             String first_name = fName.getText();
             String last_name = lName.getText();
-            String student_id = mobileNum.getText();
+            String student_id = studentNum.getText();
             
             pst = con.prepareStatement("INSERT INTO users (first_name,last_name,student_id)VALUES (?,?,?)");
             pst.setString(1, first_name);
@@ -240,7 +240,7 @@ public class Form extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Sucessfully Added!");
                 fName.setText("");
                 lName.setText("");
-                mobileNum.setText("");
+                studentNum.setText("");
                 Fetch();
                 LoadProductNo();
                 
@@ -256,7 +256,7 @@ public class Form extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         fName.setText("");
         lName.setText("");
-        mobileNum.setText("");
+        studentNum.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -270,7 +270,7 @@ public class Form extends javax.swing.JFrame {
             if (rs.next()==true) {
                 fName.setText(rs.getString(2));
                 lName.setText(rs.getString(3));
-                mobileNum.setText(rs.getString(4));
+                studentNum.setText(rs.getString(4));
             } else {
                  JOptionPane.showMessageDialog(this, "No Record Found!");
             }
@@ -283,7 +283,7 @@ public class Form extends javax.swing.JFrame {
         try {
             String first_name = fName.getText();
             String last_name = lName.getText();
-            String student_id = mobileNum.getText();
+            String student_id = studentNum.getText();
             String pid = txtID.getSelectedItem().toString();
 
             pst = con.prepareStatement("UPDATE users SET first_name=?, last_name=?, student_id=? WHERE id=?");
@@ -298,7 +298,7 @@ public class Form extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Record has been successfully updated!");
                 fName.setText("");
                 lName.setText("");
-                mobileNum.setText("");
+                studentNum.setText("");
                 fName.requestFocus();
                 Fetch();
                 LoadProductNo();
@@ -321,7 +321,7 @@ public class Form extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Record has been successfully deleted!");
                 fName.setText("");
                 lName.setText("");
-                mobileNum.setText("");
+                studentNum.setText("");
                 fName.requestFocus();
                 Fetch();
                 LoadProductNo();
@@ -381,8 +381,8 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField lName;
-    private javax.swing.JTextField mobileNum;
     private javax.swing.JButton searchButton;
+    private javax.swing.JTextField studentNum;
     private javax.swing.JButton submitButton;
     private javax.swing.JComboBox txtID;
     private javax.swing.JButton updateButton;
