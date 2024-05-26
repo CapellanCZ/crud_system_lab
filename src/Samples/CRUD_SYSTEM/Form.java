@@ -22,9 +22,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Form extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Form
-     */
+    
+    
+    
+    
     public Form() {
         initComponents();
         Connect();
@@ -39,6 +40,7 @@ public class Form extends javax.swing.JFrame {
     private void Connect(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
+                                                                   //change local host here
             con = DriverManager.getConnection("jdbc:mysql://localhost/java_users_db","root","");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Form.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,7 +78,7 @@ public class Form extends javax.swing.JFrame {
                     v2.add(rs.getString("id"));
                     v2.add(rs.getString("first_name"));
                     v2.add(rs.getString("last_name"));
-                    v2.add(rs.getString("mobile_num"));
+                    v2.add(rs.getString("student_id"));
                 }
                 df.addRow(v2);
             }
@@ -135,7 +137,7 @@ public class Form extends javax.swing.JFrame {
         getContentPane().add(mobileNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 195, 400, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
-        jLabel3.setText("Mobile Number");
+        jLabel3.setText("Student ID");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 169, -1, -1));
 
         submitButton.setFont(new java.awt.Font("Segoe UI Historic", 0, 11)); // NOI18N
@@ -192,7 +194,7 @@ public class Form extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "First Name", "Last Name", "Mobile Number"
+                "ID", "First Name", "Last Name", "Student ID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -225,12 +227,12 @@ public class Form extends javax.swing.JFrame {
             
             String first_name = fName.getText();
             String last_name = lName.getText();
-            String mobile_num = mobileNum.getText();
+            String student_id = mobileNum.getText();
             
-            pst = con.prepareStatement("INSERT INTO users (first_name,last_name,mobile_num)VALUES (?,?,?)");
+            pst = con.prepareStatement("INSERT INTO users (first_name,last_name,student_id)VALUES (?,?,?)");
             pst.setString(1, first_name);
             pst.setString(2, last_name);
-            pst.setString(3, mobile_num);
+            pst.setString(3, student_id);
             
             int k = pst.executeUpdate();
             
@@ -281,14 +283,14 @@ public class Form extends javax.swing.JFrame {
         try {
             String first_name = fName.getText();
             String last_name = lName.getText();
-            String mobile_num = mobileNum.getText();
+            String student_id = mobileNum.getText();
             String pid = txtID.getSelectedItem().toString();
 
-            pst = con.prepareStatement("UPDATE users SET first_name=?, last_name=?, mobile_num=? WHERE id=?");
+            pst = con.prepareStatement("UPDATE users SET first_name=?, last_name=?, student_id=? WHERE id=?");
 
             pst.setString(1, first_name);
             pst.setString(2, last_name);
-            pst.setString(3, mobile_num);
+            pst.setString(3, student_id);
             pst.setString(4, pid);
 
             int k = pst.executeUpdate();
@@ -309,8 +311,7 @@ public class Form extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         try {
-            // TODO add your handling code here:
-
+            
             String pid = txtID.getSelectedItem().toString();
             pst = con.prepareStatement("DELETE FROM users WHERE id=?");
             pst.setString(1, pid);
@@ -363,7 +364,7 @@ public class Form extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login_SignIn().setVisible(true);
+                new Form().setVisible(true);
             }
         });
     }
